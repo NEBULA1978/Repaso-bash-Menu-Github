@@ -1,0 +1,11 @@
+#!/bin/bash
+
+while :; do
+    #Menu
+    clear
+    echo -e "\e[1;32m"
+    echo " MENU SCRIPT V.1 "
+    echo ""
+    echo "1. Mostrar directorio"
+    echo "2. Mostrar calendario"
+    echo "3. Mostrar dato"

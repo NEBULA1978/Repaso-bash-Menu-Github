@@ -22,6 +22,7 @@ function show_content {
     [Ll])
       read -p "Escribe el nombre del archivo: " file
       if [ -f "$dir/$file" ]; then
+        echo "Leyendo archivo $file en carpeta $dir"
         cat "$dir/$file"
         read -p "Presiona enter para continuar."
         ls -l
