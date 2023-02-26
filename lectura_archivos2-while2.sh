@@ -4,20 +4,28 @@
 
 while true; do
 	clear
-	ls -l
-	echo "Introduce el nombre del archivo: "
-	read input_name
-	if [ -f $input_name ]; then
+	echo "Seleccione el archivo a leer:"
+	i=1
+	for file in *; do
+		if [ -f $file ]; then
+			echo "$i) $file"
+			((i++))
+		fi
+	done
+	echo -e "\\n"
+	echo -n "Ingrese el número del archivo que desea leer (o 'q' para salir): "
+	read input_num
+	if [ "$input_num" == "q" ]; then
+		break
+	elif [ $input_num -gt 0 ] 2>/dev/null && [ $input_num -lt $i ]; then
+		input_name=$(ls -p | grep -v / | sed -n "${input_num}p")
 		clear
 		echo "=========================LECTURA ARCHIVOS================================"
-
 		cat $input_name
 		echo -e "\\n"
 		echo "======LECTURA LINEA A LINEA===================="
 		echo -e "\\n"
-
 		#IFS INTERNAL FIELD SEPARATOR, es el separador de palabras, define el limite entre palabras
-
 		while IFS= read line; do
 			echo "$line"
 		done <$input_name
@@ -32,9 +40,6 @@ while true; do
 			break
 		fi
 	else
-		clear
-		echo "El archivo $input_name no existe."
+		echo "Número inválido."
 	fi
 done
-
-# En este script, se añade un loop interno después de leer el archivo que pregunta si el usuario desea leer otro archivo o salir del script. Si el usuario responde "s" o "S", entonces el script vuelve a preguntar el nombre del archivo a leer. Si el usuario responde cualquier otra cosa, entonces el script se detiene y sale del loop principal.
