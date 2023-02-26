@@ -12,7 +12,8 @@ switch_case() {
 		((contador_b++))
 	elif [ "$opcion" == "s" ]; then
 		echo "Ha ingresado la opcion salir"
-		echo "Opciones ingresadas: A=$contador_a, B=$contador_b"
+		echo "Opciones ingresadas: "
+		echo "A=$contador_a, B=$contador_b"
 		exit 0
 	else
 		echo "Opcion invalida"
