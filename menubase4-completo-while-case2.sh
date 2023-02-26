@@ -30,8 +30,14 @@ while true; do
   elif [ "$choice" == "4" ]; then
     echo "Introduce el nombre del archivo: "
     read file_name
+    echo -e "\\n"
+
+    # Salen unalinea y otra abajo
+    # echo -e "Esta es la primera línea\\nEsta es la segunda línea"
     if [ -f "$current_dir/$file_name" ]; then
       cat "$current_dir/$file_name" | more
+      echo -e "\\n"
+
     else
       echo "El archivo $file_name no existe en la carpeta $current_dir"
     fi
@@ -50,3 +56,5 @@ while true; do
     echo "Opción inválida. Inténtalo de nuevo."
   fi
 done
+
+# No caba de ir bien
