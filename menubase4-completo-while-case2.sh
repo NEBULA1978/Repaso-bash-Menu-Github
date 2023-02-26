@@ -1,82 +1,52 @@
 #!/bin/bash
-# Author: Ramón Pascual
 
-function show_content {
-  local dir=$1
-  local option
-  while true; do
-    clear
-    echo "Directorio actual: $dir"
-    echo "Contenido:"
-    i=1
-    for item in $(ls $dir); do
-      echo "$i. $item"
-      ((i++))
-    done
-    read -p "¿Qué quieres hacer? (C = Entrar en carpeta, L = Leer archivo, R = Retroceder, S = Salir): " option
-    case $option in
-    [Cc])
-      read -p "Escribe el número de la carpeta: " folder_num
-      folder=$(ls $dir | sed -n "${folder_num}p")
-      if [ -d "$dir/$folder" ]; then
-        dir="$dir/$folder"
-      else
-        echo "La carpeta $folder no existe."
-      fi
-      ;;
-    [Ll])
-      read -p "Escribe el número del archivo: " file_num
-      file=$(ls $dir | sed -n "${file_num}p")
-      if [ -f "$dir/$file" ]; then
-        echo "Leyendo archivo $file en carpeta $dir"
-        cat "$dir/$file"
-        read -p "Presiona enter para continuar."
-        ls -l
-        echo "Introduce el nombre del archivo:"
-        read archivo
-        echo
-        printf " 1  2  3\n"
-        batcat $archivo
-        echo "Desde qué línea desea copiar?"
-        read inicio
-        echo "Hasta qué línea desea copiar?"
-        read fin
+original_dir=$(pwd)
+current_dir=$(pwd)
 
-        # Añadir un contador al nombre de archivo resultado
-        counter=0
-        while [ -e "resultado$counter.txt" ]; do
-          counter=$((counter + 1))
-        done
+while true; do
+  echo "Elige una opción: "
+  echo "1. Ver archivos en la ruta actual"
+  echo "2. Ver archivos y carpetas en la ruta anterior"
+  echo "3. Ver archivos y carpetas en la ruta de la carpeta ~ (home)"
+  echo "4. Leer un archivo"
+  echo "5. Entrar en una carpeta"
+  echo "6. Salir"
+  read choice
 
-        # Guardar las líneas seleccionadas en un archivo resultado con el contador
-        sed -n "${inicio},${fin}p" "$archivo" >>resultado$counter.txt
-        echo
-        echo "Las líneas seleccionadas se han guardado en resultado$counter.txt"
-      else
-        echo "El archivo $file no existe."
-      fi
-      ;;
-    [Rr]) if [ "$dir" != "/" ]; then
-      dir=$(dirname "$dir")
+  if [ "$choice" == "1" ]; then
+    cd $original_dir
+    echo "Archivos en la ruta actual"
+    ls -l | more
+  elif [ "$choice" == "2" ]; then
+    cd ..
+    current_dir=$(pwd)
+    echo "Archivos y carpetas en la ruta anterior"
+    ls -l | more
+  elif [ "$choice" == "3" ]; then
+    cd ~
+    current_dir=$(pwd)
+    echo "Archivos y carpetas en la ruta de la carpeta ~ (home)"
+    ls -l | more
+  elif [ "$choice" == "4" ]; then
+    echo "Introduce el nombre del archivo: "
+    read file_name
+    if [ -f "$current_dir/$file_name" ]; then
+      cat "$current_dir/$file_name" | more
     else
-      echo "Ya estás en la raíz del sistema."
-    fi ;;
-    [Ss]) break ;;
-    *) echo "Opción inválida." ;;
-    esac
-  done
-}
-
-read -p "¿Quieres entrar en una carpeta de home o del sistema? (H/S) " choice
-choice=$(echo $choice | tr '[:lower:]' '[:upper:]')
-
-if [ "$choice" == "H" ]; then
-  dir=~
-elif [ "$choice" == "S" ]; then
-  dir="/"
-else
-  echo "Opción inválida."
-  exit 1
-fi
-
-show_content $dir
+      echo "El archivo $file_name no existe en la carpeta $current_dir"
+    fi
+  elif [ "$choice" == "5" ]; then
+    echo "Introduce el nombre de la carpeta: "
+    read folder_name
+    if [ -d "$current_dir/$folder_name" ]; then
+      cd "$current_dir/$folder_name"
+      current_dir=$(pwd)
+    else
+      echo "La carpeta $folder_name no existe en la carpeta $current_dir"
+    fi
+  elif [ "$choice" == "6" ]; then
+    break
+  else
+    echo "Opción inválida. Inténtalo de nuevo."
+  fi
+done
