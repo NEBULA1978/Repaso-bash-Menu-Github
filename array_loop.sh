@@ -45,3 +45,51 @@ echo "==============================="
 for ((i = 0; i < ${#numeros[*]}; i++)); do
 	echo "numero: ${numeros[i]}"
 done
+
+# EQUIVALENTE EN PYTHON3
+
+# hastack-admiracion/usr/bin/env python3
+# # Author: Ramón Pascual
+# # Array e Iteracion
+
+# numeros = [1, 2, 3, 4, 5, 6, 7, 8]
+# nombres = ["juan", "pedro", "luffy", "goku", "naruto"]
+# rangos = list(map(str, list(range(1, 31)))) + [chr(i) for i in range(ord('A'), ord('Z')+1)]
+
+# print("===== IMPRIMIR  VALORES ===")
+
+# print(numeros)
+# print(nombres)
+# print(rangos)
+
+# print("== Tamaño arreglos ==")
+
+# print("Tamaño de numeros:", len(numeros))
+# print("Tamaño de nombres:", len(nombres))
+# print("Tamaño de rangos:", len(rangos))
+
+# print("=== Elemento de arreglo ===")
+
+# print("Elemento numero 3 del arreglo numeros:", numeros[2])
+# print("Elemento numero 4 del arreglo nombres:", nombres[3])
+# print("Elemento numero 28 del arreglo numeros:", rangos[27])
+
+# print("=== Manipular arreglos ===")
+
+# numeros.pop(0)
+
+# print("Numeros:", numeros)
+
+# numeros.insert(0, 1)
+
+# print("Numeros:", numeros)
+
+# print("===== ITERACION FOR ========")
+
+# for num in numeros:
+#     print("Numero:", num)
+
+# print("===============================")
+
+# for i in range(len(numeros)):
+#     print("Numero:", numeros[i])
