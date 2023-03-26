@@ -173,3 +173,19 @@ done
 # Mostrar resultados
 echo "Opciones ingresadas: "
 echo "A=$contador_a, B=$contador_b, Chattr=$contador_chattr, Lsattr=$contador_lsattr, Find=$contador_find, Which=$contador_which, File=$contador_file, Hexeditor=$contador_hexeditor"
+
+# ESste script realiza lo siguiente:
+
+#     Inicializa un contador para cada una de las opciones "a", "b", "chattr", "lsattr", "find", "which", "file" y "hexeditor".
+
+#     Ejecuta un bucle durante 60 segundos (1 minuto), generando un número aleatorio entre 0 y 7 en cada iteración.
+
+#     Asigna una opción a cada número generado aleatoriamente, utilizando una estructura de control "if" anidada.
+
+#     Llama a la función switch_case para procesar la opción asignada y aumentar el contador correspondiente.
+
+#     Espera 1 segundo antes de continuar con la siguiente iteración del bucle.
+
+#     Después de 60 segundos, muestra los resultados finales, es decir, los valores de los contadores para cada opción.
+
+# Este script es útil para simular una serie de acciones aleatorias y ver cuántas veces se eligen cada una de las opciones en un período de tiempo determinado.

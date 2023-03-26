@@ -22,3 +22,5 @@ echo "Buscando archivos de texto en el directorio home"
 find ~ -type f -name "*.txt" -print | while read file; do
   echo "Archivo encontrado: $file"
 done
+
+# El script es un conjunto de comandos de shell que se ejecutan en un entorno de terminal de Linux. Primero, muestra los directorios en el directorio home utilizando el comando ls y un comodín. Luego, usa el comando tree para mostrar la estructura de directorios y archivos debajo del directorio home. Después, utiliza un bucle for para mostrar todos los directorios en la variable de entorno PATH. Finalmente, utiliza el comando find para buscar archivos de texto con extensión ".txt" en el directorio home y muestra sus nombres por consola.
